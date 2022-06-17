@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/vue.min.js"></script>
+    <script src="lib/vue-3d-model.umd.js"></script>
+</head>
+<body>
+    <div id="app">
+      <!-- <model-obj 
+        @on-load="onLoad"
+        :rotation="rotation"
+        src="models/helecopter/chopper.obj"
+        mtl="models/helecopter/chopper.mtl"></model-obj> -->
+      <!-- <model-fbx @on-load="onLoad"
+        :rotation="rotation" src="models/helecopter/Helecopter.fbx"></model-fbx> -->
+      <!-- <model-collada src="models/helecopter/1.dae"></model-collada> -->
+      <model-gltf :rotation="rotation" :scale="scale" :lights="lights" src="models/2eurocopter_ecureil_ec145/scene.gltf"></model-gltf>
+    </div>
+</body>
+<script>
+new Vue({ 
+  el: '#app',
+  data() {
+      return {
+          rotation: {
+              x: 0,
+              y: -4.9,
+              z: 0
+          },
+          scale: {
+              x: 1.5,
+              y: 1.5,
+              z: 1.5
+          },
+          lights: [
+              {
+                type: 'DirectionalLight',
+                position: { x: 1, y: 1, z: 1 },
+                color: 0xffffff,
+                intensity: 3.0,
+              },
+              {
+                type: 'DirectionalLight',
+                position: { x: -1, y: 1, z: 1 },
+                color: 0xffffff,
+                intensity: 1.0,
+              },
+              {
+                type: 'DirectionalLight',
+                position: { x: 1, y: 1, z: -1 },
+                color: 0xffffff,
+                intensity: 6.6,
+              },
+              {
+                type: 'DirectionalLight',
+                position: { x: -1, y: 1, z: -1 },
+                color: 0xffffff,
+                intensity: 0.6,
+              },
+              {
+                type: 'DirectionalLight',
+                position: { x: 0, y: -1, z: 0 },
+                color: 0xffffff,
+                intensity: 1.0,
+              },
+            ],
+      }
+  },
+  methods: {
+      onLoad() {
+          this.rotate();
+      },
+      rotate () {
+          this.rotation.y += 0.01;
+          requestAnimationFrame( this.rotate );
+      }
+  }
+});
+</script>
+</html>
